@@ -17,7 +17,11 @@ namespace OOCompanyDirectory
             get { return (BindingList < Employee >)EmployeeDataGrid.DataSource; }
             set { EmployeeDataGrid.DataSource = value; }
         }
-        
+
+        public Action DisplayAllAction { get; set; }
+        public Action<string> FirstNameSearchAction { get; set; }
+        public Action<string> LastNameSearchAction { get; set; }
+
         public EmployeeView()
         {
             InitializeComponent();
@@ -25,17 +29,18 @@ namespace OOCompanyDirectory
 
         private void DisplayAllCommand_Click(object sender, EventArgs e)
         {
-
+            DisplayAllAction();
+            
         }
 
         private void FirstNameSearchCommand_Click(object sender, EventArgs e)
         {
-
+            FirstNameSearchAction(FirstNameField.Text);
         }
 
         private void LastNameSearchCommand_Click(object sender, EventArgs e)
         {
-
+            LastNameSearchAction(LastNameField.Text);
         }
 
         private void PositionSearchCommand_Click(object sender, EventArgs e)

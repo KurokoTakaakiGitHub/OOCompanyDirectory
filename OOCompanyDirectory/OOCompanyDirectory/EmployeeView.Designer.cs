@@ -32,9 +32,9 @@ namespace OOCompanyDirectory
             this.EmployeeDataGrid = new System.Windows.Forms.DataGridView();
             this.DisplayAllCommand = new System.Windows.Forms.Button();
             this.FirstNameSearchCommand = new System.Windows.Forms.Button();
-            this.FIrstNameField = new System.Windows.Forms.TextBox();
+            this.FirstNameField = new System.Windows.Forms.TextBox();
             this.LastNameSearchCommand = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.LastNameField = new System.Windows.Forms.TextBox();
             this.PositionSelect = new System.Windows.Forms.ComboBox();
             this.PositionSearchCommand = new System.Windows.Forms.Button();
             this.UpdateCommand = new System.Windows.Forms.Button();
@@ -73,10 +73,10 @@ namespace OOCompanyDirectory
             // 
             // FIrstNameField
             // 
-            this.FIrstNameField.Location = new System.Drawing.Point(128, 16);
-            this.FIrstNameField.Name = "FIrstNameField";
-            this.FIrstNameField.Size = new System.Drawing.Size(100, 19);
-            this.FIrstNameField.TabIndex = 2;
+            this.FirstNameField.Location = new System.Drawing.Point(128, 16);
+            this.FirstNameField.Name = "FIrstNameField";
+            this.FirstNameField.Size = new System.Drawing.Size(100, 19);
+            this.FirstNameField.TabIndex = 2;
             // 
             // LastNameSearchCommand
             // 
@@ -90,10 +90,10 @@ namespace OOCompanyDirectory
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(318, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 19);
-            this.textBox1.TabIndex = 2;
+            this.LastNameField.Location = new System.Drawing.Point(318, 16);
+            this.LastNameField.Name = "textBox1";
+            this.LastNameField.Size = new System.Drawing.Size(100, 19);
+            this.LastNameField.TabIndex = 2;
             // 
             // PositionSelect
             // 
@@ -139,8 +139,8 @@ namespace OOCompanyDirectory
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 450);
             this.Controls.Add(this.PositionSelect);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.FIrstNameField);
+            this.Controls.Add(this.LastNameField);
+            this.Controls.Add(this.FirstNameField);
             this.Controls.Add(this.CloseCommand);
             this.Controls.Add(this.UpdateCommand);
             this.Controls.Add(this.PositionSearchCommand);
@@ -161,9 +161,9 @@ namespace OOCompanyDirectory
         private System.Windows.Forms.DataGridView EmployeeDataGrid;
         private System.Windows.Forms.Button DisplayAllCommand;
         private System.Windows.Forms.Button FirstNameSearchCommand;
-        private System.Windows.Forms.TextBox FIrstNameField;
+        private System.Windows.Forms.TextBox FirstNameField;
         private System.Windows.Forms.Button LastNameSearchCommand;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox LastNameField;
         private System.Windows.Forms.ComboBox PositionSelect;
         private System.Windows.Forms.Button PositionSearchCommand;
         private System.Windows.Forms.Button UpdateCommand;

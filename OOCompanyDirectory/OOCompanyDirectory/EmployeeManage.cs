@@ -8,8 +8,12 @@ namespace OOCompanyDirectory
 {
     class EmployeeManage
     {
-        private List<Employee> employees;
         private IEmployeeRepository repository;
+
+        public EmployeeManage()
+        {
+            repository = new JsonEmployeeRepository();
+        }
 
         public List<Employee> InquireByFirstName(string firstName)
         {

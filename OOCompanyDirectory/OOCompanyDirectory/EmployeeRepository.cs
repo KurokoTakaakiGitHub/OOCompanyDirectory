@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace OOCompanyDirectory
@@ -25,8 +26,16 @@ namespace OOCompanyDirectory
             var reader = new StreamReader("datafile.json");
             var jsonreadtext = reader.ReadToEnd();
             reader.Close();
+            var option = new JsonSerializerOptions
+            {
+                AllowTrailingCommas = true,
+                Converters =
+                {
+                    new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+                }
+            };
 
-            employees = JsonSerializer.Deserialize<List<Employee>>(jsonreadtext);
+            employees = JsonSerializer.Deserialize<List<Employee>>(jsonreadtext, option);
         }
 
         public bool Delete(int id)
