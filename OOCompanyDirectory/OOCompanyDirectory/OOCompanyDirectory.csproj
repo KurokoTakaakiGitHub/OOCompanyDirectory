@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomMessageBox.cs" />
     <Compile Include="IEmployeeView.cs" />
     <Compile Include="EnumGender.cs" />
     <Compile Include="EnumPosition.cs" />

@@ -61,6 +61,24 @@ namespace OOCompanyDirectory {
         }
         
         /// <summary>
+        ///   苗字を選択してください に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_NotSekectFirstName {
+            get {
+                return ResourceManager.GetString("string_NotSekectFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   名前を選択してください に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_NotSekectLastName {
+            get {
+                return ResourceManager.GetString("string_NotSekectLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   役職を選択してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string string_NotSelectPosition {

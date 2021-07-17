@@ -60,6 +60,12 @@ namespace OOCompanyDirectory
         /// <param name="firstname">苗字</param>
         public void ButtonSearchFirstName(string firstname)
         {
+            if (string.IsNullOrWhiteSpace(firstname))
+            {
+                this.ShowMessage(Resource.string_NotSekectFirstName);
+                return;
+            }
+
             var listData = this._employeeManage.InquireByFirstName(firstname);
             var bindinglist = new BindingList<Employee>(listData);
             this._employeeView.ViewData = bindinglist;
@@ -71,6 +77,12 @@ namespace OOCompanyDirectory
         /// <param name="lastname">名前</param>
         public void ButtnSearchLastName(string lastname)
         {
+            if (string.IsNullOrWhiteSpace(lastname))
+            {
+                this.ShowMessage(Resource.string_NotSekectLastName);
+                return;
+            }
+
             var listData = this._employeeManage.InquireByLastName(lastname);
             var bindinglist = new BindingList<Employee>(listData);
             this._employeeView.ViewData = bindinglist;
@@ -99,7 +111,7 @@ namespace OOCompanyDirectory
         /// <param name="message">メッセージ</param>
         public void ShowMessage(string message)
         {
-            MessageBox.Show((IWin32Window)this._employeeView, message, "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CustomMessageBox.Show((IWin32Window)this._employeeView, message, "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
