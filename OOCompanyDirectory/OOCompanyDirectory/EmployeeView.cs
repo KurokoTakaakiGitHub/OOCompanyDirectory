@@ -10,52 +10,111 @@ using System.Windows.Forms;
 
 namespace OOCompanyDirectory
 {
-    public partial class EmployeeView : Form
+    /// <summary>
+    /// 社員・View
+    /// </summary>
+    public partial class EmployeeView : Form, IEmployeeView
     {
+        /// <summary>表示するデータ</summary>
         public BindingList<Employee> ViewData
         {
-            get { return (BindingList < Employee >)EmployeeDataGrid.DataSource; }
-            set { EmployeeDataGrid.DataSource = value; }
+            get { return (BindingList<Employee>)this.DataGridViewEmployeeDataGrid.DataSource; }
+            set { this.DataGridViewEmployeeDataGrid.DataSource = value; }
         }
 
-        public Action DisplayAllAction { get; set; }
-        public Action<string> FirstNameSearchAction { get; set; }
-        public Action<string> LastNameSearchAction { get; set; }
+        /// <summary>役職コンボボックスアイテム</summary>
+        public ObjectPosition[] ComboBoxSelectPositionItems
+        {
+            set { this.ComboBoxSelectPosition.Items.AddRange(value); }
+        }
 
+        /// <summary>全てを表示する</summary>
+        public Action SearchAllAction { get; set; }
+
+        /// <summary>苗字で検索する</summary>
+        public Action<string> SearchFirstNameAction { get; set; }
+
+        /// <summary>名前で検索する</summary>
+        public Action<string> SearchLastNameAction { get; set; }
+
+        /// <summary>役職で検索する</summary>
+        public Action<object> SearchPositionAction { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeView"/> class.
+        /// </summary>
         public EmployeeView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
-        private void DisplayAllCommand_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 読込
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void EmployeeView_Load(object sender, EventArgs e)
         {
-            DisplayAllAction();
-            
         }
 
-        private void FirstNameSearchCommand_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 全検索ボタンをクリック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void ButtonSearchAll_Click(object sender, EventArgs e)
         {
-            FirstNameSearchAction(FirstNameField.Text);
+            this.SearchAllAction();
         }
 
-        private void LastNameSearchCommand_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 苗字検索ボタンをクリック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void ButtonSearchFirstName_Click(object sender, EventArgs e)
         {
-            LastNameSearchAction(LastNameField.Text);
+            this.SearchFirstNameAction(this.TextBoxSearchFirstName.Text);
         }
 
-        private void PositionSearchCommand_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 名前検索ボタンをクリック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void ButtonSearchLastName_Click(object sender, EventArgs e)
+        {
+            this.SearchLastNameAction(this.TextBoxSearchLastName.Text);
+        }
+
+        /// <summary>
+        /// 役職検索ボタンをクリック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void ButtonSearchPosition_Click(object sender, EventArgs e)
+        {
+            this.SearchPositionAction(this.ComboBoxSelectPosition.SelectedItem);
+        }
+
+        /// <summary>
+        /// 更新ボタンをクリック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void ButtonUpdate_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void UpdateCommand_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 閉じるボタンをクリック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void CloseCommand_Click(object sender, EventArgs e)
-        {
-
+            this.Close();
         }
     }
 }

@@ -7,13 +7,16 @@ using System.Windows.Forms;
 
 namespace OOCompanyDirectory
 {
-    class Program
+    /// <summary>
+    /// メインプログラム
+    /// </summary>
+    public class Program
     {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

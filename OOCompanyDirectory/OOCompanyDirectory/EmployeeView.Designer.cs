@@ -29,128 +29,134 @@ namespace OOCompanyDirectory
         /// </summary>
         private void InitializeComponent()
         {
-            this.EmployeeDataGrid = new System.Windows.Forms.DataGridView();
-            this.DisplayAllCommand = new System.Windows.Forms.Button();
-            this.FirstNameSearchCommand = new System.Windows.Forms.Button();
-            this.FirstNameField = new System.Windows.Forms.TextBox();
-            this.LastNameSearchCommand = new System.Windows.Forms.Button();
-            this.LastNameField = new System.Windows.Forms.TextBox();
-            this.PositionSelect = new System.Windows.Forms.ComboBox();
-            this.PositionSearchCommand = new System.Windows.Forms.Button();
-            this.UpdateCommand = new System.Windows.Forms.Button();
-            this.CloseCommand = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGrid)).BeginInit();
+            this.DataGridViewEmployeeDataGrid = new System.Windows.Forms.DataGridView();
+            this.ButtonSearchAll = new System.Windows.Forms.Button();
+            this.ButtonSearchFirstName = new System.Windows.Forms.Button();
+            this.TextBoxSearchFirstName = new System.Windows.Forms.TextBox();
+            this.ButtonSearchLastName = new System.Windows.Forms.Button();
+            this.TextBoxSearchLastName = new System.Windows.Forms.TextBox();
+            this.ComboBoxSelectPosition = new System.Windows.Forms.ComboBox();
+            this.ButtonSearcPositionh = new System.Windows.Forms.Button();
+            this.ButtonUpdate = new System.Windows.Forms.Button();
+            this.ButtonClose = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewEmployeeDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // EmployeeDataGrid
+            // DataGridViewEmployeeDataGrid
             // 
-            this.EmployeeDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.EmployeeDataGrid.Location = new System.Drawing.Point(12, 41);
-            this.EmployeeDataGrid.Name = "EmployeeDataGrid";
-            this.EmployeeDataGrid.RowTemplate.Height = 21;
-            this.EmployeeDataGrid.Size = new System.Drawing.Size(695, 355);
-            this.EmployeeDataGrid.TabIndex = 0;
+            this.DataGridViewEmployeeDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataGridViewEmployeeDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewEmployeeDataGrid.Location = new System.Drawing.Point(12, 41);
+            this.DataGridViewEmployeeDataGrid.Name = "DataGridViewEmployeeDataGrid";
+            this.DataGridViewEmployeeDataGrid.RowTemplate.Height = 21;
+            this.DataGridViewEmployeeDataGrid.Size = new System.Drawing.Size(754, 355);
+            this.DataGridViewEmployeeDataGrid.TabIndex = 0;
             // 
-            // DisplayAllCommand
+            // ButtonDisplayAll
             // 
-            this.DisplayAllCommand.Location = new System.Drawing.Point(12, 12);
-            this.DisplayAllCommand.Name = "DisplayAllCommand";
-            this.DisplayAllCommand.Size = new System.Drawing.Size(75, 23);
-            this.DisplayAllCommand.TabIndex = 1;
-            this.DisplayAllCommand.Text = "全検索";
-            this.DisplayAllCommand.UseVisualStyleBackColor = true;
-            this.DisplayAllCommand.Click += new System.EventHandler(this.DisplayAllCommand_Click);
+            this.ButtonSearchAll.Location = new System.Drawing.Point(12, 12);
+            this.ButtonSearchAll.Name = "ButtonDisplayAll";
+            this.ButtonSearchAll.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSearchAll.TabIndex = 1;
+            this.ButtonSearchAll.Text = "全検索";
+            this.ButtonSearchAll.UseVisualStyleBackColor = true;
+            this.ButtonSearchAll.Click += new System.EventHandler(this.ButtonSearchAll_Click);
             // 
-            // FirstNameSearchCommand
+            // ButtonSearchFirstName
             // 
-            this.FirstNameSearchCommand.Location = new System.Drawing.Point(234, 12);
-            this.FirstNameSearchCommand.Name = "FirstNameSearchCommand";
-            this.FirstNameSearchCommand.Size = new System.Drawing.Size(75, 23);
-            this.FirstNameSearchCommand.TabIndex = 1;
-            this.FirstNameSearchCommand.Text = "苗字検索";
-            this.FirstNameSearchCommand.UseVisualStyleBackColor = true;
-            this.FirstNameSearchCommand.Click += new System.EventHandler(this.FirstNameSearchCommand_Click);
+            this.ButtonSearchFirstName.Location = new System.Drawing.Point(234, 12);
+            this.ButtonSearchFirstName.Name = "ButtonSearchFirstName";
+            this.ButtonSearchFirstName.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSearchFirstName.TabIndex = 1;
+            this.ButtonSearchFirstName.Text = "苗字検索";
+            this.ButtonSearchFirstName.UseVisualStyleBackColor = true;
+            this.ButtonSearchFirstName.Click += new System.EventHandler(this.ButtonSearchFirstName_Click);
             // 
-            // FIrstNameField
+            // TextBoxSearchFirstName
             // 
-            this.FirstNameField.Location = new System.Drawing.Point(128, 16);
-            this.FirstNameField.Name = "FIrstNameField";
-            this.FirstNameField.Size = new System.Drawing.Size(100, 19);
-            this.FirstNameField.TabIndex = 2;
+            this.TextBoxSearchFirstName.Location = new System.Drawing.Point(128, 16);
+            this.TextBoxSearchFirstName.Name = "TextBoxSearchFirstName";
+            this.TextBoxSearchFirstName.Size = new System.Drawing.Size(100, 19);
+            this.TextBoxSearchFirstName.TabIndex = 2;
             // 
-            // LastNameSearchCommand
+            // ButtonSearchLastName
             // 
-            this.LastNameSearchCommand.Location = new System.Drawing.Point(424, 12);
-            this.LastNameSearchCommand.Name = "LastNameSearchCommand";
-            this.LastNameSearchCommand.Size = new System.Drawing.Size(75, 23);
-            this.LastNameSearchCommand.TabIndex = 1;
-            this.LastNameSearchCommand.Text = "名前検索";
-            this.LastNameSearchCommand.UseVisualStyleBackColor = true;
-            this.LastNameSearchCommand.Click += new System.EventHandler(this.LastNameSearchCommand_Click);
+            this.ButtonSearchLastName.Location = new System.Drawing.Point(424, 12);
+            this.ButtonSearchLastName.Name = "ButtonSearchLastName";
+            this.ButtonSearchLastName.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSearchLastName.TabIndex = 1;
+            this.ButtonSearchLastName.Text = "名前検索";
+            this.ButtonSearchLastName.UseVisualStyleBackColor = true;
+            this.ButtonSearchLastName.Click += new System.EventHandler(this.ButtonSearchLastName_Click);
             // 
-            // textBox1
+            // TextBoxSearchLastName
             // 
-            this.LastNameField.Location = new System.Drawing.Point(318, 16);
-            this.LastNameField.Name = "textBox1";
-            this.LastNameField.Size = new System.Drawing.Size(100, 19);
-            this.LastNameField.TabIndex = 2;
+            this.TextBoxSearchLastName.Location = new System.Drawing.Point(318, 16);
+            this.TextBoxSearchLastName.Name = "TextBoxSearchLastName";
+            this.TextBoxSearchLastName.Size = new System.Drawing.Size(100, 19);
+            this.TextBoxSearchLastName.TabIndex = 2;
             // 
-            // PositionSelect
+            // ComboBoxSelectPosition
             // 
-            this.PositionSelect.FormattingEnabled = true;
-            this.PositionSelect.Location = new System.Drawing.Point(505, 16);
-            this.PositionSelect.Name = "PositionSelect";
-            this.PositionSelect.Size = new System.Drawing.Size(121, 20);
-            this.PositionSelect.TabIndex = 3;
+            this.ComboBoxSelectPosition.FormattingEnabled = true;
+            this.ComboBoxSelectPosition.Location = new System.Drawing.Point(505, 16);
+            this.ComboBoxSelectPosition.Name = "ComboBoxSelectPosition";
+            this.ComboBoxSelectPosition.Size = new System.Drawing.Size(180, 20);
+            this.ComboBoxSelectPosition.TabIndex = 3;
             // 
-            // PositionSearchCommand
+            // ButtonSearcPositionh
             // 
-            this.PositionSearchCommand.Location = new System.Drawing.Point(632, 14);
-            this.PositionSearchCommand.Name = "PositionSearchCommand";
-            this.PositionSearchCommand.Size = new System.Drawing.Size(75, 23);
-            this.PositionSearchCommand.TabIndex = 1;
-            this.PositionSearchCommand.Text = "役職検索";
-            this.PositionSearchCommand.UseVisualStyleBackColor = true;
-            this.PositionSearchCommand.Click += new System.EventHandler(this.PositionSearchCommand_Click);
+            this.ButtonSearcPositionh.Location = new System.Drawing.Point(691, 14);
+            this.ButtonSearcPositionh.Name = "ButtonSearcPositionh";
+            this.ButtonSearcPositionh.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSearcPositionh.TabIndex = 1;
+            this.ButtonSearcPositionh.Text = "役職検索";
+            this.ButtonSearcPositionh.UseVisualStyleBackColor = true;
+            this.ButtonSearcPositionh.Click += new System.EventHandler(this.ButtonSearchPosition_Click);
             // 
-            // UpdateCommand
+            // ButtonUpdate
             // 
-            this.UpdateCommand.Location = new System.Drawing.Point(551, 402);
-            this.UpdateCommand.Name = "UpdateCommand";
-            this.UpdateCommand.Size = new System.Drawing.Size(75, 23);
-            this.UpdateCommand.TabIndex = 1;
-            this.UpdateCommand.Text = "更新";
-            this.UpdateCommand.UseVisualStyleBackColor = true;
-            this.UpdateCommand.Click += new System.EventHandler(this.UpdateCommand_Click);
+            this.ButtonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonUpdate.Location = new System.Drawing.Point(610, 402);
+            this.ButtonUpdate.Name = "ButtonUpdate";
+            this.ButtonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.ButtonUpdate.TabIndex = 1;
+            this.ButtonUpdate.Text = "更新";
+            this.ButtonUpdate.UseVisualStyleBackColor = true;
+            this.ButtonUpdate.Click += new System.EventHandler(this.ButtonUpdate_Click);
             // 
-            // CloseCommand
+            // ButtonClose
             // 
-            this.CloseCommand.Location = new System.Drawing.Point(632, 402);
-            this.CloseCommand.Name = "CloseCommand";
-            this.CloseCommand.Size = new System.Drawing.Size(75, 23);
-            this.CloseCommand.TabIndex = 1;
-            this.CloseCommand.Text = "閉じる";
-            this.CloseCommand.UseVisualStyleBackColor = true;
-            this.CloseCommand.Click += new System.EventHandler(this.CloseCommand_Click);
+            this.ButtonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonClose.Location = new System.Drawing.Point(691, 402);
+            this.ButtonClose.Name = "ButtonClose";
+            this.ButtonClose.Size = new System.Drawing.Size(75, 23);
+            this.ButtonClose.TabIndex = 1;
+            this.ButtonClose.Text = "閉じる";
+            this.ButtonClose.UseVisualStyleBackColor = true;
+            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // EmployeeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 450);
-            this.Controls.Add(this.PositionSelect);
-            this.Controls.Add(this.LastNameField);
-            this.Controls.Add(this.FirstNameField);
-            this.Controls.Add(this.CloseCommand);
-            this.Controls.Add(this.UpdateCommand);
-            this.Controls.Add(this.PositionSearchCommand);
-            this.Controls.Add(this.LastNameSearchCommand);
-            this.Controls.Add(this.FirstNameSearchCommand);
-            this.Controls.Add(this.DisplayAllCommand);
-            this.Controls.Add(this.EmployeeDataGrid);
+            this.ClientSize = new System.Drawing.Size(772, 436);
+            this.Controls.Add(this.ComboBoxSelectPosition);
+            this.Controls.Add(this.TextBoxSearchLastName);
+            this.Controls.Add(this.TextBoxSearchFirstName);
+            this.Controls.Add(this.ButtonClose);
+            this.Controls.Add(this.ButtonUpdate);
+            this.Controls.Add(this.ButtonSearcPositionh);
+            this.Controls.Add(this.ButtonSearchLastName);
+            this.Controls.Add(this.ButtonSearchFirstName);
+            this.Controls.Add(this.ButtonSearchAll);
+            this.Controls.Add(this.DataGridViewEmployeeDataGrid);
             this.Name = "EmployeeView";
             this.Text = "MainForm";
-            ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGrid)).EndInit();
+            this.Load += new System.EventHandler(this.EmployeeView_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewEmployeeDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,15 +164,15 @@ namespace OOCompanyDirectory
 
         #endregion
 
-        private System.Windows.Forms.DataGridView EmployeeDataGrid;
-        private System.Windows.Forms.Button DisplayAllCommand;
-        private System.Windows.Forms.Button FirstNameSearchCommand;
-        private System.Windows.Forms.TextBox FirstNameField;
-        private System.Windows.Forms.Button LastNameSearchCommand;
-        private System.Windows.Forms.TextBox LastNameField;
-        private System.Windows.Forms.ComboBox PositionSelect;
-        private System.Windows.Forms.Button PositionSearchCommand;
-        private System.Windows.Forms.Button UpdateCommand;
-        private System.Windows.Forms.Button CloseCommand;
+        private System.Windows.Forms.DataGridView DataGridViewEmployeeDataGrid;
+        private System.Windows.Forms.Button ButtonSearchAll;
+        private System.Windows.Forms.Button ButtonSearchFirstName;
+        private System.Windows.Forms.TextBox TextBoxSearchFirstName;
+        private System.Windows.Forms.Button ButtonSearchLastName;
+        private System.Windows.Forms.TextBox TextBoxSearchLastName;
+        private System.Windows.Forms.ComboBox ComboBoxSelectPosition;
+        private System.Windows.Forms.Button ButtonSearcPositionh;
+        private System.Windows.Forms.Button ButtonUpdate;
+        private System.Windows.Forms.Button ButtonClose;
     }
 }

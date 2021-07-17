@@ -4,41 +4,102 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace OOCompanyDirectory
 {
-    class EmployeePresenter
+    /// <summary>
+    /// 社員・プレゼンター
+    /// </summary>
+    public　class EmployeePresenter
     {
-        private EmployeeView employeeView;
-        private EmployeeManage employeeManage;
+        private readonly IEmployeeView _employeeView;
+        private readonly EmployeeManage _employeeManage;
 
-        public EmployeePresenter(EmployeeView view)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeePresenter"/> class.
+        /// </summary>
+        /// <param name="view">View</param>
+        public EmployeePresenter(IEmployeeView view)
         {
-            employeeView = view;
-            employeeManage = new EmployeeManage();
-            employeeView.DisplayAllAction += DisplayAllCommand;
-            employeeView.FirstNameSearchAction += FirstNameSearchCommand;
-            employeeView.LastNameSearchAction += LastNameSearchCommand;
+            this._employeeView = view;
+            this._employeeManage = new EmployeeManage();
+
+            // 各ボタンの処理を登録
+            this._employeeView.SearchAllAction += this.ButtonSearchAll;
+            this._employeeView.SearchFirstNameAction += this.ButtonSearchFirstName;
+            this._employeeView.SearchLastNameAction += this.ButtnSearchLastName;
+            this._employeeView.SearchPositionAction += this.ButtnSearchPosition;
+
+            // 役職コンボボックス設定
+            this.SetComboBoxSelectPositionItem();
         }
 
-        public void DisplayAllCommand()
+        /// <summary>
+        /// 役職コンボボックス設定
+        /// </summary>
+        public void SetComboBoxSelectPositionItem()
         {
-            var listData = employeeManage.GetAllData();
-            var bindinglist = new BindingList<Employee>(listData);
-            employeeView.ViewData = bindinglist;
-        }
-        public void FirstNameSearchCommand(string firstname)
-        {
-            var listData = employeeManage.InquireByFirstName(firstname);
-            var bindinglist = new BindingList<Employee>(listData);
-            employeeView.ViewData = bindinglist;
+            var positionsValues = (IEnumerable<Position>)Enum.GetValues(typeof(Position));
+            this._employeeView.ComboBoxSelectPositionItems = positionsValues.Select(x => new ObjectPosition(x)).ToArray();
         }
 
-        public void LastNameSearchCommand(string lastname)
+        /// <summary>
+        /// 全検索ボタン
+        /// </summary>
+        public void ButtonSearchAll()
         {
-            var listData = employeeManage.InquireByLastName(lastname);
+            var listData = this._employeeManage.GetAllData();
             var bindinglist = new BindingList<Employee>(listData);
-            employeeView.ViewData = bindinglist;
+            this._employeeView.ViewData = bindinglist;
+        }
+
+        /// <summary>
+        /// 苗字検索ボタン
+        /// </summary>
+        /// <param name="firstname">苗字</param>
+        public void ButtonSearchFirstName(string firstname)
+        {
+            var listData = this._employeeManage.InquireByFirstName(firstname);
+            var bindinglist = new BindingList<Employee>(listData);
+            this._employeeView.ViewData = bindinglist;
+        }
+
+        /// <summary>
+        /// 名前検索ボタン
+        /// </summary>
+        /// <param name="lastname">名前</param>
+        public void ButtnSearchLastName(string lastname)
+        {
+            var listData = this._employeeManage.InquireByLastName(lastname);
+            var bindinglist = new BindingList<Employee>(listData);
+            this._employeeView.ViewData = bindinglist;
+        }
+
+        /// <summary>
+        /// 役職検索ボタン
+        /// </summary>
+        /// <param name="selecedtPositionItem">選択した役職</param>
+        public void ButtnSearchPosition(object selecedtPositionItem)
+        {
+            if (!(selecedtPositionItem is ObjectPosition objectPosition))
+            {
+                this.ShowMessage(Resource.string_NotSelectPosition);
+                return;
+            }
+
+            var listData = this._employeeManage.InquireByPosition(objectPosition.Value);
+            var bindinglist = new BindingList<Employee>(listData);
+            this._employeeView.ViewData = bindinglist;
+        }
+
+        /// <summary>
+        /// メッセージ表示
+        /// </summary>
+        /// <param name="message">メッセージ</param>
+        public void ShowMessage(string message)
+        {
+            MessageBox.Show((IWin32Window)this._employeeView, message, "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

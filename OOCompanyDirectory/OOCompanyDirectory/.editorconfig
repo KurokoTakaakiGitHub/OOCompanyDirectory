@@ -1,0 +1,34 @@
+# NOTE: Requires **VS2019 16.3** or later
+
+# Rules for StyleCop.Analyzers internal-only projects
+# Description: Code analysis rules for StyleCop.Analyzers internal-only projects.
+
+# Code files
+[*.{cs,vb}]
+dotnet_diagnostic.SA1202.severity = none
+
+dotnet_diagnostic.SA1649.severity = none
+
+dotnet_diagnostic.SA1201.severity = none
+
+dotnet_diagnostic.SA1200.severity = none
+
+dotnet_diagnostic.SA1215.severity = none
+
+dotnet_diagnostic.SA1305.severity = warning
+
+dotnet_diagnostic.SA1623.severity = none
+
+dotnet_diagnostic.SA1628.severity = warning
+
+dotnet_diagnostic.SA1629.severity = none
+
+dotnet_diagnostic.SA1630.severity = warning
+
+dotnet_diagnostic.SA1631.severity = warning
+
+dotnet_diagnostic.SA1632.severity = warning
+
+dotnet_diagnostic.SA1644.severity = error
+
+dotnet_diagnostic.SA1652.severity = none
