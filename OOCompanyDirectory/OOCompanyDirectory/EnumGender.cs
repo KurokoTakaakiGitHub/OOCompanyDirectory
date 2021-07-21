@@ -28,7 +28,7 @@ namespace OOCompanyDirectory
         /// </summary>
         /// <param name="gender">性別</param>
         /// <returns>性別名称</returns>
-        public static string DisplayName(this Position gender)
+        public static string DisplayName(this Gender gender)
         {
             string[] names = { "男", "女", };
             return names[(int)gender];

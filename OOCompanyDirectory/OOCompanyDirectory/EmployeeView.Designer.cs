@@ -53,11 +53,12 @@ namespace OOCompanyDirectory
             this.DataGridViewEmployeeDataGrid.RowTemplate.Height = 21;
             this.DataGridViewEmployeeDataGrid.Size = new System.Drawing.Size(754, 355);
             this.DataGridViewEmployeeDataGrid.TabIndex = 0;
+            this.DataGridViewEmployeeDataGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridViewEmployeeDataGrid_EditingControlShowing);
             // 
-            // ButtonDisplayAll
+            // ButtonSearchAll
             // 
             this.ButtonSearchAll.Location = new System.Drawing.Point(12, 12);
-            this.ButtonSearchAll.Name = "ButtonDisplayAll";
+            this.ButtonSearchAll.Name = "ButtonSearchAll";
             this.ButtonSearchAll.Size = new System.Drawing.Size(75, 23);
             this.ButtonSearchAll.TabIndex = 1;
             this.ButtonSearchAll.Text = "全検索";

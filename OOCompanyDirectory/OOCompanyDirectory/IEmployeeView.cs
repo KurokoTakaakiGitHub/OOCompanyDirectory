@@ -32,5 +32,14 @@ namespace OOCompanyDirectory
 
         /// <summary>役職で検索する</summary>
         Action<object> SearchPositionAction { get; set; }
+
+        /// <summary>更新する</summary>
+        Action UpdateAction { get; set; }
+
+        /// <summary>フォームを閉じる</summary>
+        Action CloseFormAction { get; set; }
+
+        /// <summary>フォーム閉じる</summary>
+        void FormClose();
     }
 }

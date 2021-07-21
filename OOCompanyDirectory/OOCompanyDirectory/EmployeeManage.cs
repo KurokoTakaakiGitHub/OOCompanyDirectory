@@ -30,16 +30,6 @@ namespace OOCompanyDirectory
         public List<Employee> InquireByFirstName(string firstName)
         {
             var list = this._repository.GetAllData();
-            /* LINQを使わない
-            var employees = new List<Employee>();
-            foreach (var employee in list)
-            {
-                if(employee.FirstName == firstName)
-                {
-                    employees.Add(employee);
-                }
-            }
-            */
             return list.Where(x => x.FirstName == firstName).ToList();
         }
 
@@ -51,44 +41,82 @@ namespace OOCompanyDirectory
         public List<Employee> InquireByLastName(string lastName)
         {
             var list = this._repository.GetAllData();
-
             return list.Where(x => x.LastName == lastName).ToList();
         }
 
         /// <summary>
-        /// 職階で問い合わせ
+        /// 役職で問い合わせ
         /// </summary>
-        /// <param name="position">職階</param>
+        /// <param name="position">役職</param>
         /// <returns>社員リスト</returns>
         public List<Employee> InquireByPosition(Position position)
         {
             var list = this._repository.GetAllData();
-
             return list.Where(x => x.Position == position).ToList();
         }
 
         /// <summary>
         /// データ妥当性
         /// </summary>
-        /// <param name="employee">社員</param>
+        /// <param name="employees">社員</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool ValidateData(Employee employee)
+        public bool ValidateData(List<Employee> employees , out int errorIndex, out string errorMessage)
         {
+            errorIndex = 0;
+            errorMessage = string.Empty;
+            foreach (var employee in employees)
+            {
+                if (!this.ValidateData(employee, out errorMessage))
+                {
+                    return false;
+                }
+
+                errorIndex++;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// データ妥当性
+        /// </summary>
+        /// <param name="employee">社員</param>
+        /// <param name="errorMessage">エラーメッセージ</param>
+        /// <returns>true:正常 false:異常</returns>
+        public bool ValidateData(Employee employee, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
             if (string.IsNullOrEmpty(employee.FirstName))
             {
+                errorMessage = Resource.string_NotInputFirstName;
                 return false;
             }
 
             if (string.IsNullOrEmpty(employee.LastName))
             {
+                errorMessage = Resource.string_NotInputLastName;
                 return false;
             }
 
             if (employee.Age < 18)
             {
+                errorMessage = Resource.string_Age18Over;
                 return false;
             }
 
+            return true;
+        }
+
+        /// <summary>
+        /// 相関チェック
+        /// </summary>
+        /// <param name="employee">社員</param>
+        /// <param name="errorMessage">エラーメッセージ</param>
+        /// <returns>true:正常 false:異常</returns>
+        public bool ChecCorrelation(Employee employee, out string errorMessage)
+        {
+            errorMessage = string.Empty;
             return true;
         }
 

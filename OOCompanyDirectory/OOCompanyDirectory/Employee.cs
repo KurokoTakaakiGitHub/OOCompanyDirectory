@@ -26,7 +26,31 @@ namespace OOCompanyDirectory
         /// <summary>性別</summary>
         public Gender Gender { get; set; }
 
-        /// <summary>職階</summary>
+        /// <summary>役職</summary>
         public Position Position { get; set; }
+    }
+
+    /// <summary>
+    /// 社員カラムインデックス
+    /// </summary>
+    public enum EmployeeColumnIndex
+    {
+        /// <summary>Id</summary>
+        Id,
+
+        /// <summary>苗字</summary>
+        FirstName,
+
+        /// <summary>名前</summary>
+        LastName,
+
+        /// <summary>年齢</summary>
+        Age,
+
+        /// <summary>性別</summary>
+        Gender,
+
+        /// <summary>役職</summary>
+        Position,
     }
 }

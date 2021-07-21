@@ -50,9 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomMessageBox.cs" />
+    <Compile Include="EnumMessageLevel.cs" />
     <Compile Include="IEmployeeView.cs" />
     <Compile Include="EnumGender.cs" />
     <Compile Include="EnumPosition.cs" />
+    <Compile Include="ObjectGender.cs" />
     <Compile Include="ObjectPosition.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeManage.cs" />

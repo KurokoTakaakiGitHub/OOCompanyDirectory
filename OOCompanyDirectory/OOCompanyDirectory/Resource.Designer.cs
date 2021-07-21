@@ -61,6 +61,33 @@ namespace OOCompanyDirectory {
         }
         
         /// <summary>
+        ///   年齢は１８以上を入力してください に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_Age18Over {
+            get {
+                return ResourceManager.GetString("string_Age18Over", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   苗字を入力してください に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_NotInputFirstName {
+            get {
+                return ResourceManager.GetString("string_NotInputFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   名前を入力してください に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_NotInputLastName {
+            get {
+                return ResourceManager.GetString("string_NotInputLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   苗字を選択してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string string_NotSekectFirstName {
@@ -84,6 +111,15 @@ namespace OOCompanyDirectory {
         internal static string string_NotSelectPosition {
             get {
                 return ResourceManager.GetString("string_NotSelectPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   更新データがありません に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_NotUpdataData {
+            get {
+                return ResourceManager.GetString("string_NotUpdataData", resourceCulture);
             }
         }
     }

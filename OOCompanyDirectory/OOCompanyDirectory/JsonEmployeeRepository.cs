@@ -86,22 +86,6 @@ namespace OOCompanyDirectory
                 return false;
             }
 
-            #region LINQを使わないと…
-            //bool isExist = false;
-            //foreach (var emp in employees)
-            //{
-            //    if(emp.Id == employee.Id)
-            //    {
-            //        isExist = true;
-            //        break;
-            //    }
-            //}
-            //if (isExist)
-            //{
-            //    return false;
-            //}
-            #endregion
-
             this._employees.Add(employee);
             this.WriteData();
 

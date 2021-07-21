@@ -18,8 +18,9 @@ namespace OOCompanyDirectory
         /// <summary>表示するデータ</summary>
         public BindingList<Employee> ViewData
         {
-            get { return (BindingList<Employee>)this.DataGridViewEmployeeDataGrid.DataSource; }
-            set { this.DataGridViewEmployeeDataGrid.DataSource = value; }
+            get{ return (BindingList<Employee>)this.DataGridViewEmployeeDataGrid.DataSource; }
+
+            set{ this.SetBindingListDataGlidView(value); }
         }
 
         /// <summary>役職コンボボックスアイテム</summary>
@@ -40,12 +41,81 @@ namespace OOCompanyDirectory
         /// <summary>役職で検索する</summary>
         public Action<object> SearchPositionAction { get; set; }
 
+        /// <summary>更新する</summary>
+        public Action UpdateAction { get; set; }
+
+        /// <summary>フォームを閉じる</summary>
+        public Action CloseFormAction { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeView"/> class.
         /// </summary>
         public EmployeeView()
         {
             this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// ＤＧＶにデータを設定する
+        /// </summary>
+        /// <param name="bindingList">データ</param>
+        private void SetBindingListDataGlidView(BindingList<Employee> bindingList)
+        {
+            this.DataGridViewEmployeeDataGrid.AutoGenerateColumns = false;
+            this.DataGridViewEmployeeDataGrid.AutoSize = false;
+            this.DataGridViewEmployeeDataGrid.DataSource = bindingList;
+
+            var test = new List<DataGridViewColumn>();
+            test.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Id)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Id)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.FirstName)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.LastName)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Age)));
+
+            // 職位
+            var positionColumn = this.CreateDgvComboBoxColumn(nameof(EmployeeColumnIndex.Position), Enum.GetValues(typeof(Position)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(positionColumn);
+
+            // 性別
+            var genderColumn = this.CreateDgvComboBoxColumn(nameof(EmployeeColumnIndex.Gender), Enum.GetValues(typeof(Gender)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(genderColumn);
+
+            this.DataGridViewEmployeeDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DataGridViewEmployeeDataGrid.AutoSize = true;
+        }
+
+        /// <summary>
+        /// データグリッドビューのテキストボックスカラムを生成
+        /// </summary>
+        /// <param name="columnName">列名</param>
+        /// <returns>テキストボックスカラム</returns>
+        private DataGridViewTextBoxColumn CreateDgvTextBoxColumn(string columnName)
+        {
+            return new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = columnName,
+                Name = columnName,
+                HeaderText = columnName,
+                ReadOnly = false,
+            };
+        }
+
+        /// <summary>
+        /// データグリッドビューのコンボボックスカラムを生成
+        /// </summary>
+        /// <param name="columnName">列名</param>
+        /// <param name="array">コンボボックスに設定する配列</param>
+        /// <returns>コンボボックスカラム</returns>
+        private DataGridViewComboBoxColumn CreateDgvComboBoxColumn(string columnName, Array array)
+        {
+            return new DataGridViewComboBoxColumn()
+            {
+                DataPropertyName = columnName,
+                Name = columnName,
+                HeaderText = columnName,
+                FlatStyle = FlatStyle.Flat,
+                DataSource = array,
+            };
         }
 
         /// <summary>
@@ -104,7 +174,7 @@ namespace OOCompanyDirectory
         /// <param name="e">パラメータ</param>
         private void ButtonUpdate_Click(object sender, EventArgs e)
         {
-
+            this.UpdateAction();
         }
 
         /// <summary>
@@ -113,6 +183,47 @@ namespace OOCompanyDirectory
         /// <param name="sender">呼出し元</param>
         /// <param name="e">パラメータ</param>
         private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            this.CloseFormAction();
+        }
+
+        /// <summary>
+        /// dgv入力するテキストボックス表示しているとき
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void DataGridViewEmployeeDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            // 表示されているコントロールがDataGridViewTextBoxEditingControlか？
+            if (e.Control is DataGridViewTextBoxEditingControl)
+            {
+                var dgv = (DataGridView)sender;
+                var textBox = (TextBox)e.Control;
+
+                if (dgv.CurrentCell.ColumnIndex == 0 || dgv.CurrentCell.ColumnIndex == 3)
+                {
+                    textBox.KeyPress += new KeyPressEventHandler(this.CheckKey);
+                }
+            }
+        }
+
+        /// <summary>
+        /// キーチェック
+        /// </summary>
+        /// <param name="sender">呼出し元</param>
+        /// <param name="e">パラメータ</param>
+        private void CheckKey(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// フォームを閉じる
+        /// </summary>
+        public void FormClose()
         {
             this.Close();
         }
