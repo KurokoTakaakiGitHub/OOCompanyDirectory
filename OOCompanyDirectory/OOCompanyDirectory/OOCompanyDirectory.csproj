@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>OOCompanyDirectory</RootNamespace>
     <AssemblyName>OOCompanyDirectory</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -51,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CustomMessageBox.cs" />
     <Compile Include="EnumMessageLevel.cs" />
+    <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IEmployeeView.cs" />
     <Compile Include="EnumGender.cs" />
     <Compile Include="EnumPosition.cs" />
@@ -59,7 +62,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeManage.cs" />
     <Compile Include="EmployeePresenter.cs" />
-    <Compile Include="JsonEmployeeRepository.cs" />
+    <Compile Include="EmployeeRepository.cs" />
     <Compile Include="EmployeeView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,13 +81,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>2.2.5</Version>
+    </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
       <Version>1.1.118</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
-      <Version>5.0.1</Version>
+      <Version>5.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

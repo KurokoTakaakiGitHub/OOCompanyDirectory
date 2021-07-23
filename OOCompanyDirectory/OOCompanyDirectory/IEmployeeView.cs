@@ -41,5 +41,9 @@ namespace OOCompanyDirectory
 
         /// <summary>フォーム閉じる</summary>
         void FormClose();
+
+        /// <summary>データグリッドView・行選択</summary>
+        /// <param name="selectRowIndex">選択する行番号</param>
+        void DataGridViewSelectRow(int selectRowIndex);
     }
 }

@@ -70,6 +70,15 @@ namespace OOCompanyDirectory {
         }
         
         /// <summary>
+        ///   Idが重複しています に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_DuplicateId {
+            get {
+                return ResourceManager.GetString("string_DuplicateId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   苗字を入力してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string string_NotInputFirstName {

@@ -120,6 +120,9 @@
   <data name="string_Age18Over" xml:space="preserve">
     <value>年齢は１８以上を入力してください</value>
   </data>
+  <data name="string_DuplicateId" xml:space="preserve">
+    <value>Idが重複しています</value>
+  </data>
   <data name="string_NotInputFirstName" xml:space="preserve">
     <value>苗字を入力してください</value>
   </data>

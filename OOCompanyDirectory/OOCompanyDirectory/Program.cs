@@ -20,9 +20,17 @@ namespace OOCompanyDirectory
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var view = new EmployeeView();
-            var presenter = new EmployeePresenter(view);
-            Application.Run(view);
+
+            try
+            {
+                var view = new EmployeeView();
+                var presenter = new EmployeePresenter(view);
+                Application.Run(view);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n" + e.StackTrace, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

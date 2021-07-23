@@ -19,7 +19,7 @@ namespace OOCompanyDirectory
         /// </summary>
         public EmployeeManage()
         {
-            this._repository = new JsonEmployeeRepository();
+            this._repository = new EmployeeRepository();
         }
 
         /// <summary>
@@ -59,10 +59,12 @@ namespace OOCompanyDirectory
         /// データ妥当性
         /// </summary>
         /// <param name="employees">社員</param>
+        /// <param name="errorRowIndex">エラー行インデックス</param>
+        /// <param name="errorMessage">エラーメッセージ</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool ValidateData(List<Employee> employees , out int errorIndex, out string errorMessage)
+        public bool ValidateData(List<Employee> employees, out int errorRowIndex, out string errorMessage)
         {
-            errorIndex = 0;
+            errorRowIndex = int.MaxValue;
             errorMessage = string.Empty;
             foreach (var employee in employees)
             {
@@ -70,8 +72,12 @@ namespace OOCompanyDirectory
                 {
                     return false;
                 }
+            }
 
-                errorIndex++;
+            // 相関チェック
+            if (!this.CheckCorrelation(employees, out errorRowIndex, out errorMessage))
+            {
+                return false;
             }
 
             return true;
@@ -111,13 +117,54 @@ namespace OOCompanyDirectory
         /// <summary>
         /// 相関チェック
         /// </summary>
-        /// <param name="employee">社員</param>
+        /// <param name="employees">社員</param>
+        /// <param name="errorRowIndex">エラー行</param>
         /// <param name="errorMessage">エラーメッセージ</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool ChecCorrelation(Employee employee, out string errorMessage)
+        public bool CheckCorrelation(List<Employee> employees, out int errorRowIndex, out string errorMessage)
         {
+            errorRowIndex = int.MaxValue;
             errorMessage = string.Empty;
+
+            // Id重複チェック
+            var duplications = employees.GroupBy(x => x.Id).Select(x => new { Id = x.Key, Count = x.Count() }).Where(x => x.Count > 1).FirstOrDefault();
+
+            if (duplications != null)
+            {
+                errorRowIndex = employees.Select((p, i) => new { data = p, Index = i }).Where(x => x.data.Id == duplications.Id).Select(x => x.Index).FirstOrDefault();
+                errorMessage = Resource.string_DuplicateId;
+                return false;
+            }
+
             return true;
+        }
+
+        /// <summary>
+        /// 更新データ件数チェック
+        /// </summary>
+        /// <returns>true:対象なし false:対象あり</returns>
+        public bool CheckUpdateDataCount()
+        {
+            // 更新前全データ取得
+            var sourceData = this._repository.GetAllData();
+
+            // 更新データ作成
+            return true;
+        }
+
+        private List<Employee> MakeInserData()
+        {
+            return null;
+        }
+
+        private List<Employee> MakeUpdateData()
+        {
+            return null;
+        }
+
+        private List<Employee> MakeDeleteData()
+        {
+            return null;
         }
 
         /// <summary>

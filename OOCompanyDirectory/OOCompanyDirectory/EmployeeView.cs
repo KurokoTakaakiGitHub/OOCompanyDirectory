@@ -18,9 +18,9 @@ namespace OOCompanyDirectory
         /// <summary>表示するデータ</summary>
         public BindingList<Employee> ViewData
         {
-            get{ return (BindingList<Employee>)this.DataGridViewEmployeeDataGrid.DataSource; }
+            get { return (BindingList<Employee>)this.DataGridViewEmployeeDataGrid.DataSource; }
 
-            set{ this.SetBindingListDataGlidView(value); }
+            set { this.SetBindingListDataGlidView(value); }
         }
 
         /// <summary>役職コンボボックスアイテム</summary>
@@ -194,7 +194,6 @@ namespace OOCompanyDirectory
         /// <param name="e">パラメータ</param>
         private void DataGridViewEmployeeDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            // 表示されているコントロールがDataGridViewTextBoxEditingControlか？
             if (e.Control is DataGridViewTextBoxEditingControl)
             {
                 var dgv = (DataGridView)sender;
@@ -203,6 +202,10 @@ namespace OOCompanyDirectory
                 if (dgv.CurrentCell.ColumnIndex == 0 || dgv.CurrentCell.ColumnIndex == 3)
                 {
                     textBox.KeyPress += new KeyPressEventHandler(this.CheckKey);
+                }
+                else
+                {
+                    textBox.KeyPress -= new KeyPressEventHandler(this.CheckKey);
                 }
             }
         }
@@ -226,6 +229,16 @@ namespace OOCompanyDirectory
         public void FormClose()
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// データグリッドView・行選択
+        /// </summary>
+        /// <param name="selectRowIndex">選択する行番号</param>
+        public　void DataGridViewSelectRow(int selectRowIndex)
+        {
+            this.DataGridViewEmployeeDataGrid.ClearSelection();
+            this.DataGridViewEmployeeDataGrid.Rows[selectRowIndex].Selected = true;
         }
     }
 }

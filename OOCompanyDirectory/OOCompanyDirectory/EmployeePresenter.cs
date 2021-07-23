@@ -15,6 +15,7 @@ namespace OOCompanyDirectory
     {
         private readonly IEmployeeView _employeeView;
         private readonly EmployeeManage _employeeManage;
+        private BindingList<Employee> _displayBindinglist;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeePresenter"/> class.
@@ -23,18 +24,25 @@ namespace OOCompanyDirectory
         public EmployeePresenter(IEmployeeView view)
         {
             this._employeeView = view;
-            this._employeeManage = new EmployeeManage();
+            //try
+            //{
+                this._employeeManage = new EmployeeManage();
 
-            // 各ボタンの処理を登録
-            this._employeeView.SearchAllAction += this.ButtonSearchAll;
-            this._employeeView.SearchFirstNameAction += this.ButtonSearchFirstName;
-            this._employeeView.SearchLastNameAction += this.ButtnSearchLastName;
-            this._employeeView.SearchPositionAction += this.ButtnSearchPosition;
-            this._employeeView.UpdateAction += this.ButtnUpdate;
-            this._employeeView.CloseFormAction += this.ButtnClose;
+                // 各ボタンの処理を登録
+                this._employeeView.SearchAllAction += this.ButtonSearchAll;
+                this._employeeView.SearchFirstNameAction += this.ButtonSearchFirstName;
+                this._employeeView.SearchLastNameAction += this.ButtnSearchLastName;
+                this._employeeView.SearchPositionAction += this.ButtnSearchPosition;
+                this._employeeView.UpdateAction += this.ButtnUpdate;
+                this._employeeView.CloseFormAction += this.ButtnClose;
 
-            // 役職コンボボックス設定
-            this.SetComboBoxSelectPositionItem();
+                // 役職コンボボックス設定
+                this.SetComboBoxSelectPositionItem();
+            //}
+            //catch (Exception e)
+            //{
+            //    this.ShowMessage(MessageLevel.Error, e.Message + "\n" + e.StackTrace);
+            //}
         }
 
         /// <summary>
@@ -113,21 +121,27 @@ namespace OOCompanyDirectory
         private void ButtnUpdate()
         {
             var updateData = this._employeeView.ViewData;
+
             if (updateData is null)
             {
                 this.ShowMessage(MessageLevel.Information, Resource.string_NotUpdataData);
                 return;
             }
 
-            // 入力チェック
-            if (!this._employeeManage.ValidateData(updateData.ToList(), out var errorIndex, out var errorMessage))
+            if (!this._employeeManage.ValidateData(updateData.ToList(), out var errorRowIndex, out var errorMessage))
             {
                 this.ShowMessage(MessageLevel.Warning, errorMessage);
+
+                if (errorRowIndex != int.MaxValue)
+                {
+                    this._employeeView.DataGridViewSelectRow(errorRowIndex);
+                }
+
                 return;
             }
 
-            // 更新確認メッセージ
-
+            // 更新前件数チェック
+            
             // 更新処理
 
             // 完了メッセージ

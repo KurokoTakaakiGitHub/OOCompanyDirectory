@@ -20,31 +20,43 @@ namespace OOCompanyDirectory
         {
             [DllImport("user32.dll")]
             private static extern IntPtr GetWindowLong(IntPtr hWnd, int nIndex);
+
             const int GWL_HINSTANCE = -6;
 
             public static IntPtr GetWindowHInstance(IntPtr hWnd) => GetWindowLong(hWnd, GWL_HINSTANCE);
+
             [DllImport("kernel32.dll")]
             public static extern IntPtr GetCurrentThreadId();
 
             [DllImport("user32.dll")]
             static extern IntPtr SetWindowsHookEx(int idHook, HOOKPROC lpfn, IntPtr hInstance, IntPtr threadId);
+
             const int WH_CBT = 5;
+
             public static IntPtr SetWindowsHookEx(HOOKPROC lpfn, IntPtr hInstance, IntPtr threadId) => SetWindowsHookEx(WH_CBT, lpfn, hInstance, threadId);
 
             [DllImport("user32.dll")]
             public static extern bool UnhookWindowsHookEx(IntPtr hHook);
+
             [DllImport("user32.dll")]
             public static extern IntPtr CallNextHookEx(IntPtr hHook, int nCode, IntPtr wParam, IntPtr lParam);
 
             public delegate IntPtr HOOKPROC(int nCode, IntPtr wParam, IntPtr lParam);
+
             public const int HCBT_ACTIVATE = 5;
 
             [DllImport("user32.dll")]
             static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
             public struct RECT
             {
-                public int Left, Top, Right, Bottom;
+                public int Left;
+                public int Top;
+                public int Right;
+                public int Bottom;
+
                 public int Width => this.Right - this.Left;
+
                 public int Height => this.Bottom - this.Top;
             }
 
@@ -54,8 +66,10 @@ namespace OOCompanyDirectory
                 GetWindowRect(hWnd, out rc);
                 return rc;
             }
+
             [DllImport("user32.dll")]
             static extern bool SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+
             const uint SWP_NOSIZE = 0x0001;
             const uint SWP_NOZORDER = 0x0004;
             const uint SWP_NOACTIVATE = 0x0010;
