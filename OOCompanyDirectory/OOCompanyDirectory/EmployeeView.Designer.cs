@@ -53,6 +53,7 @@ namespace OOCompanyDirectory
             this.DataGridViewEmployeeDataGrid.RowTemplate.Height = 21;
             this.DataGridViewEmployeeDataGrid.Size = new System.Drawing.Size(754, 355);
             this.DataGridViewEmployeeDataGrid.TabIndex = 0;
+            this.DataGridViewEmployeeDataGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridViewEmployeeDataGrid_CellBeginEdit);
             this.DataGridViewEmployeeDataGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridViewEmployeeDataGrid_EditingControlShowing);
             // 
             // ButtonSearchAll
@@ -60,7 +61,7 @@ namespace OOCompanyDirectory
             this.ButtonSearchAll.Location = new System.Drawing.Point(12, 12);
             this.ButtonSearchAll.Name = "ButtonSearchAll";
             this.ButtonSearchAll.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSearchAll.TabIndex = 1;
+            this.ButtonSearchAll.TabIndex = 0;
             this.ButtonSearchAll.Text = "全検索";
             this.ButtonSearchAll.UseVisualStyleBackColor = true;
             this.ButtonSearchAll.Click += new System.EventHandler(this.ButtonSearchAll_Click);
@@ -70,7 +71,7 @@ namespace OOCompanyDirectory
             this.ButtonSearchFirstName.Location = new System.Drawing.Point(234, 12);
             this.ButtonSearchFirstName.Name = "ButtonSearchFirstName";
             this.ButtonSearchFirstName.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSearchFirstName.TabIndex = 1;
+            this.ButtonSearchFirstName.TabIndex = 2;
             this.ButtonSearchFirstName.Text = "苗字検索";
             this.ButtonSearchFirstName.UseVisualStyleBackColor = true;
             this.ButtonSearchFirstName.Click += new System.EventHandler(this.ButtonSearchFirstName_Click);
@@ -80,14 +81,14 @@ namespace OOCompanyDirectory
             this.TextBoxSearchFirstName.Location = new System.Drawing.Point(128, 16);
             this.TextBoxSearchFirstName.Name = "TextBoxSearchFirstName";
             this.TextBoxSearchFirstName.Size = new System.Drawing.Size(100, 19);
-            this.TextBoxSearchFirstName.TabIndex = 2;
+            this.TextBoxSearchFirstName.TabIndex = 1;
             // 
             // ButtonSearchLastName
             // 
             this.ButtonSearchLastName.Location = new System.Drawing.Point(424, 12);
             this.ButtonSearchLastName.Name = "ButtonSearchLastName";
             this.ButtonSearchLastName.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSearchLastName.TabIndex = 1;
+            this.ButtonSearchLastName.TabIndex = 4;
             this.ButtonSearchLastName.Text = "名前検索";
             this.ButtonSearchLastName.UseVisualStyleBackColor = true;
             this.ButtonSearchLastName.Click += new System.EventHandler(this.ButtonSearchLastName_Click);
@@ -97,7 +98,7 @@ namespace OOCompanyDirectory
             this.TextBoxSearchLastName.Location = new System.Drawing.Point(318, 16);
             this.TextBoxSearchLastName.Name = "TextBoxSearchLastName";
             this.TextBoxSearchLastName.Size = new System.Drawing.Size(100, 19);
-            this.TextBoxSearchLastName.TabIndex = 2;
+            this.TextBoxSearchLastName.TabIndex = 3;
             // 
             // ComboBoxSelectPosition
             // 
@@ -105,14 +106,14 @@ namespace OOCompanyDirectory
             this.ComboBoxSelectPosition.Location = new System.Drawing.Point(505, 16);
             this.ComboBoxSelectPosition.Name = "ComboBoxSelectPosition";
             this.ComboBoxSelectPosition.Size = new System.Drawing.Size(180, 20);
-            this.ComboBoxSelectPosition.TabIndex = 3;
+            this.ComboBoxSelectPosition.TabIndex = 5;
             // 
             // ButtonSearcPositionh
             // 
             this.ButtonSearcPositionh.Location = new System.Drawing.Point(691, 14);
             this.ButtonSearcPositionh.Name = "ButtonSearcPositionh";
             this.ButtonSearcPositionh.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSearcPositionh.TabIndex = 1;
+            this.ButtonSearcPositionh.TabIndex = 6;
             this.ButtonSearcPositionh.Text = "役職検索";
             this.ButtonSearcPositionh.UseVisualStyleBackColor = true;
             this.ButtonSearcPositionh.Click += new System.EventHandler(this.ButtonSearchPosition_Click);
@@ -123,7 +124,7 @@ namespace OOCompanyDirectory
             this.ButtonUpdate.Location = new System.Drawing.Point(610, 402);
             this.ButtonUpdate.Name = "ButtonUpdate";
             this.ButtonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.ButtonUpdate.TabIndex = 1;
+            this.ButtonUpdate.TabIndex = 7;
             this.ButtonUpdate.Text = "更新";
             this.ButtonUpdate.UseVisualStyleBackColor = true;
             this.ButtonUpdate.Click += new System.EventHandler(this.ButtonUpdate_Click);
@@ -134,7 +135,7 @@ namespace OOCompanyDirectory
             this.ButtonClose.Location = new System.Drawing.Point(691, 402);
             this.ButtonClose.Name = "ButtonClose";
             this.ButtonClose.Size = new System.Drawing.Size(75, 23);
-            this.ButtonClose.TabIndex = 1;
+            this.ButtonClose.TabIndex = 8;
             this.ButtonClose.Text = "閉じる";
             this.ButtonClose.UseVisualStyleBackColor = true;
             this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);

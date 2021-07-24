@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DeepCopyUtils.cs" />
+    <Compile Include="Compare\CompareEmployee.cs" />
     <Compile Include="CustomMessageBox.cs" />
     <Compile Include="EnumMessageLevel.cs" />
     <Compile Include="IEmployeeRepository.cs" />

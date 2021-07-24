@@ -131,5 +131,23 @@ namespace OOCompanyDirectory {
                 return ResourceManager.GetString("string_NotUpdataData", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   更新に失敗しました に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_UpdateFailed {
+            get {
+                return ResourceManager.GetString("string_UpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   更新に成功しました に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string string_UpdateSucceeded {
+            get {
+                return ResourceManager.GetString("string_UpdateSucceeded", resourceCulture);
+            }
+        }
     }
 }

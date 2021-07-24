@@ -38,7 +38,7 @@ namespace UnitTestOOCompanyDirectory
             [TestInitialize]
             public void 準備()
             {
-                this.employeeManage = new EmployeeManage();
+                this.employeeManage = new EmployeeManage("datafile.json");
             }
 
             [TestCategory("更新データあり")]
@@ -46,7 +46,7 @@ namespace UnitTestOOCompanyDirectory
             public void 更新データありのときTureを返す()
             {
                 // 実行 & 検証
-                Assert.AreEqual(true, this.employeeManage.CheckUpdateDataCount());
+                Assert.AreEqual(true, this.employeeManage.CheckUpdateDataCount(new List<Employee>()));
             }
         }
 

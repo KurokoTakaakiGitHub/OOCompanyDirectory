@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OOCompanyDirectory
@@ -13,9 +11,8 @@ namespace OOCompanyDirectory
     /// </summary>
     public　class EmployeePresenter
     {
-        private readonly IEmployeeView _employeeView;
-        private readonly EmployeeManage _employeeManage;
-        private BindingList<Employee> _displayBindinglist;
+        private readonly IEmployeeView employeeView;
+        private readonly EmployeeManage employeeManage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeePresenter"/> class.
@@ -23,26 +20,34 @@ namespace OOCompanyDirectory
         /// <param name="view">View</param>
         public EmployeePresenter(IEmployeeView view)
         {
-            this._employeeView = view;
-            //try
-            //{
-                this._employeeManage = new EmployeeManage();
+            this.employeeView = view;
+            try
+            {
+                this.employeeView.ButtonEnable(true, false);
 
                 // 各ボタンの処理を登録
-                this._employeeView.SearchAllAction += this.ButtonSearchAll;
-                this._employeeView.SearchFirstNameAction += this.ButtonSearchFirstName;
-                this._employeeView.SearchLastNameAction += this.ButtnSearchLastName;
-                this._employeeView.SearchPositionAction += this.ButtnSearchPosition;
-                this._employeeView.UpdateAction += this.ButtnUpdate;
-                this._employeeView.CloseFormAction += this.ButtnClose;
+                this.employeeView.SearchAllAction += this.ButtonSearchAll;
+                this.employeeView.SearchFirstNameAction += this.ButtonSearchFirstName;
+                this.employeeView.SearchLastNameAction += this.ButtnSearchLastName;
+                this.employeeView.SearchPositionAction += this.ButtnSearchPosition;
+                this.employeeView.UpdateAction += this.ButtnUpdate;
+                this.employeeView.CloseFormAction += this.ButtnClose;
+
+                // 社員管理生成
+                this.employeeManage = new EmployeeManage("datafile.json");
 
                 // 役職コンボボックス設定
                 this.SetComboBoxSelectPositionItem();
-            //}
-            //catch (Exception e)
-            //{
-            //    this.ShowMessage(MessageLevel.Error, e.Message + "\n" + e.StackTrace);
-            //}
+            }
+            catch (System.IO.IOException ex)
+            {
+                this.ShowMessage(MessageLevel.Error, "Not File datafile.json");
+                this.employeeView.ButtonEnable(false, true);
+            }
+            catch (Exception e)
+            {
+                this.ShowMessage(MessageLevel.Error, e.Message + "\n" + e.StackTrace);
+            }
         }
 
         /// <summary>
@@ -51,7 +56,7 @@ namespace OOCompanyDirectory
         public void SetComboBoxSelectPositionItem()
         {
             var positionsValues = (IEnumerable<Position>)Enum.GetValues(typeof(Position));
-            this._employeeView.ComboBoxSelectPositionItems = positionsValues.Select(x => new ObjectPosition(x)).ToArray();
+            this.employeeView.ComboBoxSelectPositionItems = positionsValues.Select(x => new ObjectPosition(x)).ToArray();
         }
 
         /// <summary>
@@ -59,9 +64,9 @@ namespace OOCompanyDirectory
         /// </summary>
         private void ButtonSearchAll()
         {
-            var listData = this._employeeManage.GetAllData();
-            var bindinglist = new BindingList<Employee>(listData);
-            this._employeeView.ViewData = bindinglist;
+            var listData = this.employeeManage.GetAllData();
+            var bindinglist = new BindingList<Employee>(listData.ToList());
+            this.employeeView.ViewData = bindinglist;
         }
 
         /// <summary>
@@ -76,9 +81,9 @@ namespace OOCompanyDirectory
                 return;
             }
 
-            var listData = this._employeeManage.InquireByFirstName(firstname);
-            var bindinglist = new BindingList<Employee>(listData);
-            this._employeeView.ViewData = bindinglist;
+            var listData = this.employeeManage.InquireByFirstName(firstname);
+            var bindinglist = new BindingList<Employee>(listData.ToList());
+            this.employeeView.ViewData = bindinglist;
         }
 
         /// <summary>
@@ -93,9 +98,9 @@ namespace OOCompanyDirectory
                 return;
             }
 
-            var listData = this._employeeManage.InquireByLastName(lastname);
-            var bindinglist = new BindingList<Employee>(listData);
-            this._employeeView.ViewData = bindinglist;
+            var listData = this.employeeManage.InquireByLastName(lastname);
+            var bindinglist = new BindingList<Employee>(listData.ToList());
+            this.employeeView.ViewData = bindinglist;
         }
 
         /// <summary>
@@ -110,9 +115,9 @@ namespace OOCompanyDirectory
                 return;
             }
 
-            var listData = this._employeeManage.InquireByPosition(objectPosition.Value);
-            var bindinglist = new BindingList<Employee>(listData);
-            this._employeeView.ViewData = bindinglist;
+            var listData = this.employeeManage.InquireByPosition(objectPosition.Value);
+            var bindinglist = new BindingList<Employee>(listData.ToList());
+            this.employeeView.ViewData = bindinglist;
         }
 
         /// <summary>
@@ -120,31 +125,41 @@ namespace OOCompanyDirectory
         /// </summary>
         private void ButtnUpdate()
         {
-            var updateData = this._employeeView.ViewData;
-
-            if (updateData is null)
+            try
             {
-                this.ShowMessage(MessageLevel.Information, Resource.string_NotUpdataData);
-                return;
-            }
-
-            if (!this._employeeManage.ValidateData(updateData.ToList(), out var errorRowIndex, out var errorMessage))
-            {
-                this.ShowMessage(MessageLevel.Warning, errorMessage);
-
-                if (errorRowIndex != int.MaxValue)
+                var updateData = this.employeeView.ViewData;
+                if (updateData is null)
                 {
-                    this._employeeView.DataGridViewSelectRow(errorRowIndex);
+                    this.ShowMessage(MessageLevel.Information, Resource.string_NotUpdataData);
+                    return;
                 }
 
-                return;
+                if (!this.employeeManage.ValidateData(updateData.ToList(), out var errorRowIndex, out var errorMessage))
+                {
+                    this.ShowMessage(MessageLevel.Warning, errorMessage);
+
+                    if (errorRowIndex != int.MaxValue)
+                    {
+                        this.employeeView.DataGridViewSelectRow(errorRowIndex);
+                    }
+
+                    return;
+                }
+
+                if (!this.employeeManage.CheckExistUpdateData(this.employeeView.ViewData.ToList()))
+                {
+                    this.ShowMessage(MessageLevel.Information, Resource.string_NotUpdataData);
+                    return;
+                }
+
+                this.employeeManage.Update(this.employeeView.ViewData.ToList());
+
+                this.ShowMessage(MessageLevel.Information, Resource.string_UpdateSucceeded);
             }
-
-            // 更新前件数チェック
-            
-            // 更新処理
-
-            // 完了メッセージ
+            catch (Exception e)
+            {
+                this.ShowMessage(MessageLevel.Information, Resource.string_UpdateFailed);
+            }
         }
 
         /// <summary>
@@ -152,7 +167,7 @@ namespace OOCompanyDirectory
         /// </summary>
         private void ButtnClose()
         {
-            this._employeeView.FormClose();
+            this.employeeView.FormClose();
         }
 
         /// <summary>
@@ -164,15 +179,15 @@ namespace OOCompanyDirectory
             switch (messageLevel)
             {
                 case MessageLevel.Information:
-                    CustomMessageBox.Show((IWin32Window)this._employeeView, message, messageLevel.DisplayName(), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Show((IWin32Window)this.employeeView, message, messageLevel.DisplayName(), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
 
                 case MessageLevel.Warning:
-                    CustomMessageBox.Show((IWin32Window)this._employeeView, message, messageLevel.DisplayName(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    CustomMessageBox.Show((IWin32Window)this.employeeView, message, messageLevel.DisplayName(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
 
                 case MessageLevel.Error:
-                    CustomMessageBox.Show((IWin32Window)this._employeeView, message, messageLevel.DisplayName(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMessageBox.Show((IWin32Window)this.employeeView, message, messageLevel.DisplayName(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
             }
         }

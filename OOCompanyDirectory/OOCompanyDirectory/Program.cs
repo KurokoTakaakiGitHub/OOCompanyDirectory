@@ -18,11 +18,10 @@ namespace OOCompanyDirectory
         [STAThread]
         private static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
             try
             {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
                 var view = new EmployeeView();
                 var presenter = new EmployeePresenter(view);
                 Application.Run(view);

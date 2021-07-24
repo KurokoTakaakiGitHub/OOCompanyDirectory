@@ -42,7 +42,16 @@ namespace OOCompanyDirectory
         /// <summary>フォーム閉じる</summary>
         void FormClose();
 
-        /// <summary>データグリッドView・行選択</summary>
+        /// <summary>
+        /// ボタンを有効にする
+        /// </summary>
+        /// <param name="isEnable">有効にする</param>
+        /// <param name="isExceptClosButton">閉じるボタンを除く</param>
+        void ButtonEnable(bool isEnable, bool isExceptClosButton);
+
+        /// <summary>
+        /// データグリッドView・行選択
+        /// </summary>
         /// <param name="selectRowIndex">選択する行番号</param>
         void DataGridViewSelectRow(int selectRowIndex);
     }

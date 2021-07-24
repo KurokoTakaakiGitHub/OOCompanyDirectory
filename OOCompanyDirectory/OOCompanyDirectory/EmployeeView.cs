@@ -61,16 +61,16 @@ namespace OOCompanyDirectory
         /// <param name="bindingList">データ</param>
         private void SetBindingListDataGlidView(BindingList<Employee> bindingList)
         {
+            this.DataGridViewEmployeeDataGrid.Columns.Clear();
+
             this.DataGridViewEmployeeDataGrid.AutoGenerateColumns = false;
-            this.DataGridViewEmployeeDataGrid.AutoSize = false;
             this.DataGridViewEmployeeDataGrid.DataSource = bindingList;
 
             var test = new List<DataGridViewColumn>();
-            test.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Id)));
-            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Id)));
-            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.FirstName)));
-            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.LastName)));
-            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Age)));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Id), false));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.FirstName), false));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.LastName), false));
+            this.DataGridViewEmployeeDataGrid.Columns.Add(this.CreateDgvTextBoxColumn(nameof(EmployeeColumnIndex.Age), false));
 
             // 職位
             var positionColumn = this.CreateDgvComboBoxColumn(nameof(EmployeeColumnIndex.Position), Enum.GetValues(typeof(Position)));
@@ -81,22 +81,22 @@ namespace OOCompanyDirectory
             this.DataGridViewEmployeeDataGrid.Columns.Add(genderColumn);
 
             this.DataGridViewEmployeeDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DataGridViewEmployeeDataGrid.AutoSize = true;
         }
 
         /// <summary>
         /// データグリッドビューのテキストボックスカラムを生成
         /// </summary>
         /// <param name="columnName">列名</param>
+        /// <param name="isReadOnly">読み取り専用</param>
         /// <returns>テキストボックスカラム</returns>
-        private DataGridViewTextBoxColumn CreateDgvTextBoxColumn(string columnName)
+        private DataGridViewTextBoxColumn CreateDgvTextBoxColumn(string columnName, bool isReadOnly)
         {
             return new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = columnName,
                 Name = columnName,
                 HeaderText = columnName,
-                ReadOnly = false,
+                ReadOnly = isReadOnly,
             };
         }
 
@@ -239,6 +239,36 @@ namespace OOCompanyDirectory
         {
             this.DataGridViewEmployeeDataGrid.ClearSelection();
             this.DataGridViewEmployeeDataGrid.Rows[selectRowIndex].Selected = true;
+        }
+
+        /// <summary>
+        /// ボタンを有効にする
+        /// </summary>
+        /// <param name="isEnable">有効にする</param>
+        /// <param name="isExceptClosButton">閉じるボタンを除く</param>
+        public void ButtonEnable(bool isEnable, bool isExceptClosButton)
+        {
+            this.ButtonSearchAll.Enabled = isEnable;
+            this.ButtonSearchFirstName.Enabled = isEnable;
+            this.ButtonSearchLastName.Enabled = isEnable;
+            this.ButtonSearcPositionh.Enabled = isEnable;
+            this.ButtonUpdate.Enabled = isEnable;
+            this.ButtonClose.Enabled = isEnable;
+
+            if (isExceptClosButton)
+            {
+                this.ButtonClose.Enabled = !isEnable;
+            }
+        }
+
+        private void DataGridViewEmployeeDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            var dgv = (DataGridView)sender;
+
+            if (dgv.Columns[e.ColumnIndex].Name == "Id" && !dgv.Rows[e.RowIndex].IsNewRow)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

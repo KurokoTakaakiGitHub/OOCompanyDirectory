@@ -9,6 +9,7 @@ namespace OOCompanyDirectory
     /// <summary>
     /// 社員
     /// </summary>
+    [Serializable]
     public class Employee
     {
         /// <summary>Id</summary>

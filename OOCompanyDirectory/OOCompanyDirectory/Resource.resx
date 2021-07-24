@@ -141,4 +141,10 @@
   <data name="string_NotUpdataData" xml:space="preserve">
     <value>更新データがありません</value>
   </data>
+  <data name="string_UpdateFailed" xml:space="preserve">
+    <value>更新に失敗しました</value>
+  </data>
+  <data name="string_UpdateSucceeded" xml:space="preserve">
+    <value>更新に成功しました</value>
+  </data>
 </root>
