@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOCompanyDirectory
+﻿namespace OOCompanyDirectory
 {
     /// <summary>役職</summary>
     public enum Position

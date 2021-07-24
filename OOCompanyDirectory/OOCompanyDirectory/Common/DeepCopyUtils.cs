@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOCompanyDirectory
 {
@@ -13,6 +8,11 @@ namespace OOCompanyDirectory
     /// </summary>
     public static class DeepCopyUtils
     {
+        /// <summary>
+        /// コピー
+        /// </summary>
+        /// <param name="target">コピー先</param>
+        /// <returns>コピー結果</returns>
         public static object DeepCopy(this object target)
         {
             object result;

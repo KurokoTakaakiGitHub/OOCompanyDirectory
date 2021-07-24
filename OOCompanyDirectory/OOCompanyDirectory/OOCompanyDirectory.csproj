@@ -54,11 +54,11 @@
     <Compile Include="Common\DeepCopyUtils.cs" />
     <Compile Include="Compare\CompareEmployee.cs" />
     <Compile Include="CustomMessageBox.cs" />
-    <Compile Include="EnumMessageLevel.cs" />
+    <Compile Include="Enum\EnumGender.cs" />
+    <Compile Include="Enum\EnumMessageLevel.cs" />
+    <Compile Include="Enum\EnumPosition.cs" />
     <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IEmployeeView.cs" />
-    <Compile Include="EnumGender.cs" />
-    <Compile Include="EnumPosition.cs" />
     <Compile Include="ObjectGender.cs" />
     <Compile Include="ObjectPosition.cs" />
     <Compile Include="Employee.cs" />
@@ -104,5 +104,6 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

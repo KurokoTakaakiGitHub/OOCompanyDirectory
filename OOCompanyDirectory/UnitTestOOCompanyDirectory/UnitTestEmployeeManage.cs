@@ -46,7 +46,7 @@ namespace UnitTestOOCompanyDirectory
             public void 更新データありのときTureを返す()
             {
                 // 実行 & 検証
-                Assert.AreEqual(true, this.employeeManage.CheckUpdateDataCount(new List<Employee>()));
+                Assert.AreEqual(true, this.employeeManage.CheckExistUpdateData(new List<Employee>()));
             }
         }
 
@@ -59,8 +59,6 @@ namespace UnitTestOOCompanyDirectory
             {
             }
         }
-
-
     }
 
 }

@@ -29,6 +29,8 @@ dotnet_diagnostic.SA1631.severity = warning
 
 dotnet_diagnostic.SA1632.severity = warning
 
+dotnet_diagnostic.SA1633.severity = none
+
 dotnet_diagnostic.SA1644.severity = error
 
 dotnet_diagnostic.SA1652.severity = none

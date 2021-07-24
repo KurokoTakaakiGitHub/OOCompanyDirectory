@@ -13,7 +13,7 @@ namespace OOCompanyDirectory
     public class Employee
     {
         /// <summary>Id</summary>
-        public int Id { get; set; }
+        public int Id { get;  set; }
 
         /// <summary>苗字</summary>
         public string FirstName { get; set; }
@@ -29,6 +29,19 @@ namespace OOCompanyDirectory
 
         /// <summary>役職</summary>
         public Position Position { get; set; }
+
+        /// <summary>
+        /// 更新項目をセット
+        /// </summary>
+        /// <param name="updateData">更新データ</param>
+        public void SetUpdateColumn(Employee updateData)
+        {
+            this.FirstName = updateData.FirstName;
+            this.LastName = updateData.LastName;
+            this.Age = updateData.Age;
+            this.Gender = updateData.Gender;
+            this.Position = updateData.Position;
+        }
     }
 
     /// <summary>

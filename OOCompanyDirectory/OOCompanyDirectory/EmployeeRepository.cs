@@ -14,8 +14,6 @@ namespace OOCompanyDirectory
         /// <summary>社員</summary>
         private readonly List<Employee> employees;
 
-        private List<Employee> loadingData = new List<Employee>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeRepository"/> class.
         /// </summary>
@@ -108,12 +106,7 @@ namespace OOCompanyDirectory
                 return false;
             }
 
-            target.FirstName = employee.FirstName;
-            target.LastName = employee.LastName;
-            target.Age = employee.Age;
-            target.Gender = employee.Gender;
-            target.Position = employee.Position;
-
+            target.SetUpdateColumn(target);
             this.WriteData();
 
             return true;

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOCompanyDirectory
 {
@@ -201,7 +199,7 @@ namespace OOCompanyDirectory
         {
             var updateDatas = updateData.Intersect(original, new CompareEmployeeId()).ToList();
             var originalDatas = original.Intersect(updateData, new CompareEmployeeId()).ToList();
-            return updateDatas.Except(originalDatas, new CompareEmployeeALL()).ToList();
+            return updateDatas.Except(originalDatas, new CompareEmployee()).ToList();
         }
 
         /// <summary>
@@ -276,7 +274,7 @@ namespace OOCompanyDirectory
             {
                 if (!this.repository.Update(employee))
                 {
-                    var message =string.Format("Not Update , Not Id Data UpdateDatas" + "[{0}]", employee.Id);
+                    var message = string.Format("Not Update , Not Id Data UpdateDatas" + "[{0}]", employee.Id);
                     throw new Exception(message);
                 }
             }
