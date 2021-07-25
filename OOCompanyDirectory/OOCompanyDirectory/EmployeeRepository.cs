@@ -106,7 +106,7 @@ namespace OOCompanyDirectory
                 return false;
             }
 
-            target.SetUpdateColumn(target);
+            target.SetUpdateColumn(employee);
             this.WriteData();
 
             return true;

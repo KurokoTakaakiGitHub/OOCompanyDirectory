@@ -22,6 +22,15 @@ namespace OOCompanyDirectory
         }
 
         /// <summary>
+        /// 全てのデータを取得
+        /// </summary>
+        /// <returns>社員リスト</returns>
+        public List<Employee> GetAllData()
+        {
+            return this.repository.GetAllData();
+        }
+
+        /// <summary>
         /// 苗字で問い合わせ
         /// </summary>
         /// <param name="firstName">苗字</param>
@@ -88,7 +97,7 @@ namespace OOCompanyDirectory
         /// <param name="employee">社員</param>
         /// <param name="errorMessage">エラーメッセージ</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool ValidateData(Employee employee, out string errorMessage)
+        private bool ValidateData(Employee employee, out string errorMessage)
         {
             errorMessage = string.Empty;
 
@@ -120,7 +129,7 @@ namespace OOCompanyDirectory
         /// <param name="errorRowIndex">エラー行</param>
         /// <param name="errorMessage">エラーメッセージ</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool CheckCorrelation(List<Employee> employees, out int errorRowIndex, out string errorMessage)
+        private bool CheckCorrelation(List<Employee> employees, out int errorRowIndex, out string errorMessage)
         {
             errorRowIndex = int.MaxValue;
             errorMessage = string.Empty;
@@ -130,7 +139,7 @@ namespace OOCompanyDirectory
 
             if (duplications != null)
             {
-                errorRowIndex = employees.Select((p, i) => new { data = p, Index = i }).Where(x => x.data.Id == duplications.Id).Select(x => x.Index).FirstOrDefault();
+                errorRowIndex = employees.Select((p, i) => new { data = p, Index = i }).Where(x => x.data.Id == duplications.Id).Select(x => x.Index).LastOrDefault();
                 errorMessage = Resource.string_DuplicateId;
                 return false;
             }
@@ -226,6 +235,11 @@ namespace OOCompanyDirectory
             var deleteDatas = this.MakeDeleteData(original, viewDatas);
             var updateDatas = this.MakeUpdateData(original, viewDatas);
 
+            if (!this.ExistUpdateData(insertDatas, deleteDatas, updateDatas))
+            {
+                return false;
+            }
+
             if (insertDatas.Any())
             {
                 this.InsertDatas(insertDatas);
@@ -249,7 +263,7 @@ namespace OOCompanyDirectory
         /// </summary>
         /// <param name="employees">社員</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool InsertDatas(List<Employee> employees)
+        private bool InsertDatas(List<Employee> employees)
         {
             foreach (var employee in employees)
             {
@@ -268,7 +282,7 @@ namespace OOCompanyDirectory
         /// </summary>
         /// <param name="employees">社員</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool UpdatetDatas(List<Employee> employees)
+        private bool UpdatetDatas(List<Employee> employees)
         {
             foreach (var employee in employees)
             {
@@ -287,7 +301,7 @@ namespace OOCompanyDirectory
         /// </summary>
         /// <param name="employees">社員</param>
         /// <returns>true:正常 false:異常</returns>
-        public bool DeleteDatas(List<Employee> employees)
+        private bool DeleteDatas(List<Employee> employees)
         {
             foreach (var employee in employees)
             {
@@ -299,15 +313,6 @@ namespace OOCompanyDirectory
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// 全てのデータを取得
-        /// </summary>
-        /// <returns>社員リスト</returns>
-        public List<Employee> GetAllData()
-        {
-            return this.repository.GetAllData();
         }
     }
 }

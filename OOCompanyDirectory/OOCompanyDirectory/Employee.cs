@@ -30,6 +30,39 @@ namespace OOCompanyDirectory
         /// <summary>役職</summary>
         public Position Position { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            if (this == null && obj == null)
+            {
+                return true;
+            }
+
+            if (this == null || obj == null)
+            {
+                return false;
+            }
+
+            if (obj is Employee y)
+            {
+                return
+                  this.Id == y.Id
+               && this.FirstName == y.FirstName
+               && this.LastName == y.LastName
+               && this.Age == y.Age
+               && (int)this.Position == (int)y.Position
+               && (int)this.Gender == (int)y.Gender;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode() ^ this.FirstName.GetHashCode() ^ this.LastName.GetHashCode() ^ this.Age.GetHashCode() ^ this.Position.GetHashCode() ^ this.Gender.GetHashCode();
+        }
+
         /// <summary>
         /// 更新項目をセット
         /// </summary>
