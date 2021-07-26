@@ -694,27 +694,6 @@ namespace UnitTestOOCompanyDirectory
                 // 後戻し
                 Assert.IsTrue(employeeManage.Update(this.DisplayData_Normal_NotUpdate_Data()));
             }
-
-            [TestCategory("データあり＿異常＿挿入")]
-            [TestMethod]
-            public void 異常_挿入()
-            {
-                
-                var employeeManage = new EmployeeManage("datafileAddTest.json");
-                bool exception = false;
-                try
-                {
-                    // 実行
-                    Assert.IsFalse(employeeManage.Update(this.DisplayData_Normal_Data_Insert_Error()));
-                }
-                catch (Exception e)
-                {
-                    exception = true;
-                }
-                // 検証
-                Assert.IsTrue(exception);
-                CollectionAssert.AreEqual(this.DisplayData_Normal_NotUpdate_Data(), employeeManage.GetAllData());
-            }
         }
     }
 

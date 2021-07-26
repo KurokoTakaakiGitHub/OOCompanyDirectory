@@ -1,0 +1,43 @@
+        // privateメソッド
+        private int AddValue(int additionValue)
+        {
+            return _Value + additionValue;
+        }
+        
+        
+        // privateメソッドのテスト
+        [TestMethod]
+        public void AddValueTest()
+        {
+            // PrivateObjectを作成して、AddValueメソッドを呼び出す
+            var myClass = new MyClass();
+            var privateObject = new PrivateObject(myClass);
+            var value = (int) privateObject.Invoke("AddValue", 1);
+            Assert.AreEqual(1, value);
+        }
+
+        // privateプロパティとprivateフィールドのテスト
+        [TestMethod]
+        public void IsZeroTest()
+        {
+            // PrivateObjectを作成して、_ValueフィールドとIsZeroプロパティを呼び出す
+            var myClass = new MyClass();
+            var privateObject = new PrivateObject(myClass);
+
+            // privateフィールドを取得
+            var value = (int) privateObject.GetField("_Value");
+            Assert.AreEqual(0, value);
+
+            // privateプロパティを取得
+            var isZero = (bool) privateObject.GetProperty("IsZero");
+            Assert.IsTrue(isZero);
+        }
+
+
+        // MyClassの以下のメソッド用の拡張メソッドを定義
+        // private int AddValue(int additionValue)
+
+        public static int AddValue(this MyClass myClass, int additionValue)
+        {
+            return (int) new PrivateObject(myClass).Invoke("AddValue", additionValue);
+        }

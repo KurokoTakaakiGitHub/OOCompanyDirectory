@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestOOCompanyDirectory", "UnitTestOOCompanyDirectory\UnitTestOOCompanyDirectory.csproj", "{1441B21D-6086-47FB-85A2-2B3507F9D806}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{5000CDE6-29EA-4F4F-BC4F-26B78BE3556D}"
+	ProjectSection(SolutionItems) = preProject
+		Memo.txt = Memo.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
